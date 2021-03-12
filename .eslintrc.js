@@ -18,11 +18,13 @@ module.exports = {
   plugins: [
     'react',
     '@typescript-eslint',
+    'import/typescript',
   ],
   rules: {
+    'import/extensions': 0,
     'no-use-before-define': 'off',
     'no-undef': 'off',
     'react/jsx-filename-extension': [2, { extensions: ['.tsx'] }],
-    'react/jsx-props-no-spreading': [2, { custom: 'ignore' }],
+    'react/jsx-props-no-spreading': 0,
   },
 };
