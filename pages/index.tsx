@@ -1,5 +1,8 @@
 import React from 'react';
+import { GetStaticProps } from 'next';
 import Head from 'next/head';
+
+import fetch from 'node-fetch';
 
 import {
   siteTitle,
@@ -13,6 +16,11 @@ import {
 import TwitterIcon from '../components/icons/TwitterIcon';
 import GithubIcon from '../components/icons/GithubIcon';
 import LinkedinIcon from '../components/icons/LinkedinIcon';
+import { getTopTracksKey } from '../lib/lastfmClient';
+
+type Props = {
+  data: any;
+}
 
 type NavItem = {
   url: string;
@@ -25,7 +33,7 @@ const navItems: NavItem[] = [
   { url: linkedinUrl, Icon: LinkedinIcon },
 ];
 
-const Home = (): JSX.Element => (
+const Home = (props: Props): JSX.Element => (
   <div className="mx-auto w-full max-w-2xl p-4">
     <Head>
       <title>{siteTitle}</title>
@@ -64,5 +72,21 @@ const Home = (): JSX.Element => (
     <footer />
   </div>
 );
+
+export const getStaticProps: GetStaticProps = async () => {
+  const key = getTopTracksKey('7day');
+  const res = await fetch(key);
+  console.log('res', res);
+  const json = await res.json();
+
+  console.log('json', json);
+
+  return {
+    props: {
+      data: json,
+    },
+    revalidate: 1,
+  };
+};
 
 export default Home;
