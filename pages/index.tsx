@@ -14,10 +14,11 @@ import {
 import TwitterIcon from '../components/icons/TwitterIcon';
 import GithubIcon from '../components/icons/GithubIcon';
 import LinkedinIcon from '../components/icons/LinkedinIcon';
-import { getTopTracks, Track } from '../lib/lastfm/lastfmClient';
+import { getTopTracks, getTopAlbums, Item } from '../lib/lastfm/lastfmClient';
 
 type Props = {
-  tracks: Track[];
+  tracks: Item[];
+  albums: Item[];
 }
 
 type NavItem = {
@@ -83,10 +84,12 @@ const Home = (props: Props): JSX.Element => {
 
 export const getStaticProps: GetStaticProps = async () => {
   const [, tracks] = await getTopTracks('1month');
+  const [, albums] = await getTopAlbums('1month');
 
   return {
     props: {
       tracks,
+      albums,
     },
     revalidate: 1,
   };

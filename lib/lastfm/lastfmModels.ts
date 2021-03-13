@@ -38,6 +38,16 @@ export interface Track {
   url: string;
 }
 
+export interface Album {
+  artist: Artist;
+  '@attr': RankAttr;
+  image: Image[];
+  playcount: string;
+  url: string;
+  name: string;
+  mbid: string;
+}
+
 export interface TopTracks {
   '@attr': ResultAttr;
   track: Track[];
@@ -45,4 +55,13 @@ export interface TopTracks {
 
 export interface EnvelopeTopTracks {
   toptracks: TopTracks;
+}
+
+export interface TopAlbums {
+  album: Album[];
+  '@attr': ResultAttr;
+}
+
+export interface EnvelopeTopAlbums {
+  topalbums: TopAlbums;
 }

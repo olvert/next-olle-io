@@ -1,13 +1,16 @@
 import fetch from 'node-fetch';
-import { EnvelopeTopTracks, Track as RawTrack } from './lastfmModels';
+import { Album, EnvelopeTopAlbums, EnvelopeTopTracks, Track } from './lastfmModels';
 
 type Period = 'overall' | '7day' | '1month' | '3month' | '6month' | '12month';
 
 type QueryKey = 'method' | 'user' | 'api_key' | 'format' | 'period' | 'limit';
-type QueryMethod = 'user.gettoptracks';
+type QueryMethod = 'user.gettoptracks' | 'user.gettopalbums' | 'user.gettopartists';
 type QueryObject = Record<QueryKey, string>;
 
-export type Track = {
+type ItemsResponse = [number, Item[] | undefined];
+type Mapper = (json: any) => Item[];
+
+export type Item = {
   name: string;
   artist: string;
   playCount: string;
@@ -35,25 +38,34 @@ const getKey = (method: QueryMethod, period: Period): string => {
 };
 
 const getTopTracksKey = (period: Period): string => getKey('user.gettoptracks', period);
+const getTopAlbumsKey = (period: Period): string => getKey('user.gettopalbums', period);
+const getTopArtistsKey = (period: Period): string => getKey('user.gettopartists', period);
 
-const rawTrackToTrack = (rawTrack: RawTrack): Track => ({
-  name: rawTrack.name,
-  artist: rawTrack.artist.name,
-  playCount: rawTrack.playcount,
+const trackToItem = (track: Track): Item => ({
+  name: track.name,
+  artist: track.artist.name,
+  playCount: track.playcount,
 });
 
-const mapEnvelopeToTracks = (envelope: EnvelopeTopTracks): Track[] => {
+const albumToItem = (album: Album): Item => ({
+  name: album.name,
+  artist: album.artist.name,
+  playCount: album.playcount,
+});
+
+const mapTopTracksEnvelopeToItems = (envelope: EnvelopeTopTracks): Item[] => {
   const tracks = envelope.toptracks.track ?? undefined;
 
-  if (tracks === undefined) {
-    return undefined;
-  }
-
-  return tracks.map(rawTrackToTrack);
+  return (tracks !== undefined) ? tracks.map(trackToItem) : undefined;
 };
 
-export const getTopTracks = async (period: Period): Promise<[number, Track[] | undefined]> => {
-  const key = getTopTracksKey(period);
+const mapTopAlbumsEnvelopeToItems = (envelope: EnvelopeTopAlbums): Item[] => {
+  const albums = envelope.topalbums.album ?? undefined;
+
+  return (albums !== undefined) ? albums.map(albumToItem) : undefined;
+};
+
+const getItems = async (key: string, mapper: Mapper): Promise<ItemsResponse> => {
   const res = await fetch(key);
 
   if (res.ok !== true) {
@@ -61,7 +73,19 @@ export const getTopTracks = async (period: Period): Promise<[number, Track[] | u
   }
 
   const json = await res.json();
-  const tracks = mapEnvelopeToTracks(json);
+  const items = mapper(json);
 
-  return [res.status, tracks];
+  return [res.status, items];
+};
+
+export const getTopTracks = async (period: Period): Promise<ItemsResponse> => {
+  const key = getTopTracksKey(period);
+
+  return getItems(key, mapTopTracksEnvelopeToItems);
+};
+
+export const getTopAlbums = async (period: Period): Promise<ItemsResponse> => {
+  const key = getTopAlbumsKey(period);
+
+  return getItems(key, mapTopAlbumsEnvelopeToItems);
 };
