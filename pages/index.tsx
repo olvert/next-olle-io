@@ -14,12 +14,13 @@ import {
 import TwitterIcon from '../components/icons/TwitterIcon';
 import GithubIcon from '../components/icons/GithubIcon';
 import LinkedinIcon from '../components/icons/LinkedinIcon';
-import { getTopTracks, getTopAlbums, Item } from '../lib/lastfm/lastfmClient';
+import { getTopTracks, getTopAlbums, Item, getTopArtists } from '../lib/lastfm/lastfmClient';
 import ScrobbleSection from '../components/ScrobbleSection';
 
 type Props = {
   tracks: Item[];
   albums: Item[];
+  artists: Item[];
 }
 
 type NavItem = {
@@ -34,7 +35,7 @@ const navItems: NavItem[] = [
 ];
 
 const Home = (props: Props): JSX.Element => {
-  const { tracks, albums } = props;
+  const { tracks, albums, artists } = props;
   return (
     <div className="mx-auto w-full max-w-2xl p-4">
       <Head>
@@ -68,6 +69,7 @@ const Home = (props: Props): JSX.Element => {
           <div className="border border-gray-800 rounded-md py-2 px-4 mt-2">
             <ScrobbleSection title="Top Tracks" items={tracks} />
             <ScrobbleSection title="Top Albums" items={albums} />
+            <ScrobbleSection title="Top Artists" items={artists} />
           </div>
         </div>
       </main>
@@ -80,11 +82,13 @@ const Home = (props: Props): JSX.Element => {
 export const getStaticProps: GetStaticProps = async () => {
   const [, tracks] = await getTopTracks('1month');
   const [, albums] = await getTopAlbums('1month');
+  const [, artists] = await getTopArtists('1month');
 
   return {
     props: {
       tracks,
       albums,
+      artists,
     },
     revalidate: 1,
   };

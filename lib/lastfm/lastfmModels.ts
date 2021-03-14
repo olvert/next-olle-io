@@ -11,9 +11,13 @@ export interface RankAttr {
 }
 
 export interface Artist {
-  url: string;
-  name: string;
+  '@attr': RankAttr;
   mbid: string;
+  url: string;
+  playcount: string;
+  image: Image[];
+  name: string;
+  streamable: string;
 }
 
 export interface Image {
@@ -64,4 +68,13 @@ export interface TopAlbums {
 
 export interface EnvelopeTopAlbums {
   topalbums: TopAlbums;
+}
+
+export interface TopArtists {
+  artist: Artist[];
+  '@attr': ResultAttr;
+}
+
+export interface EnvelopeTopArtists {
+  topartists: TopArtists;
 }

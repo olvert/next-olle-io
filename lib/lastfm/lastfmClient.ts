@@ -1,5 +1,5 @@
 import fetch from 'node-fetch';
-import { Album, EnvelopeTopAlbums, EnvelopeTopTracks, Track } from './lastfmModels';
+import { Album, Artist, EnvelopeTopAlbums, EnvelopeTopArtists, EnvelopeTopTracks, Track } from './lastfmModels';
 
 type Period = 'overall' | '7day' | '1month' | '3month' | '6month' | '12month';
 
@@ -53,6 +53,12 @@ const albumToItem = (album: Album): Item => ({
   playCount: album.playcount,
 });
 
+const artistToItem = (artist: Artist): Item => ({
+  name: artist.name,
+  artist: '',
+  playCount: artist.playcount,
+});
+
 const mapTopTracksEnvelopeToItems = (envelope: EnvelopeTopTracks): Item[] => {
   const tracks = envelope.toptracks.track ?? undefined;
 
@@ -63,6 +69,12 @@ const mapTopAlbumsEnvelopeToItems = (envelope: EnvelopeTopAlbums): Item[] => {
   const albums = envelope.topalbums.album ?? undefined;
 
   return (albums !== undefined) ? albums.map(albumToItem) : undefined;
+};
+
+const mapTopArtistsEnvelopeToItems = (envelope: EnvelopeTopArtists): Item[] => {
+  const artists = envelope.topartists.artist ?? undefined;
+
+  return (artists !== undefined) ? artists.map(artistToItem) : undefined;
 };
 
 const getItems = async (key: string, mapper: Mapper): Promise<ItemsResponse> => {
@@ -88,4 +100,10 @@ export const getTopAlbums = async (period: Period): Promise<ItemsResponse> => {
   const key = getTopAlbumsKey(period);
 
   return getItems(key, mapTopAlbumsEnvelopeToItems);
+};
+
+export const getTopArtists = async (period: Period): Promise<ItemsResponse> => {
+  const key = getTopArtistsKey(period);
+
+  return getItems(key, mapTopArtistsEnvelopeToItems);
 };
