@@ -15,6 +15,7 @@ import TwitterIcon from '../components/icons/TwitterIcon';
 import GithubIcon from '../components/icons/GithubIcon';
 import LinkedinIcon from '../components/icons/LinkedinIcon';
 import { getTopTracks, getTopAlbums, Item } from '../lib/lastfm/lastfmClient';
+import ScrobbleSection from '../components/ScrobbleSection';
 
 type Props = {
   tracks: Item[];
@@ -33,7 +34,7 @@ const navItems: NavItem[] = [
 ];
 
 const Home = (props: Props): JSX.Element => {
-  const { tracks } = props;
+  const { tracks, albums } = props;
   return (
     <div className="mx-auto w-full max-w-2xl p-4">
       <Head>
@@ -65,14 +66,8 @@ const Home = (props: Props): JSX.Element => {
         <div className="pt-8">
           <h2 className="font-fira text-xl font-semibold tracking-wide">Scrobbles</h2>
           <div className="border border-gray-800 rounded-md py-2 px-4 mt-2">
-            <h3 className="font-semibold tracking-wide">Top Tracks</h3>
-            { tracks.map((t) => (
-              <div className="text-sm my-2 p-2 rounded border border-gray-800 hover:bg-gray-800">
-                <p className="font-semibold">{t.name}</p>
-                <p className="text-gray-400">{t.artist}</p>
-                <p className="text-gray-400">{`${t.playCount} plays`}</p>
-              </div>
-            ))}
+            <ScrobbleSection title="Top Tracks" items={tracks} />
+            <ScrobbleSection title="Top Albums" items={albums} />
           </div>
         </div>
       </main>
