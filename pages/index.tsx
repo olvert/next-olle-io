@@ -11,9 +11,7 @@ import {
   email,
 } from '../lib/data.json';
 
-import TwitterIcon from '../components/icons/TwitterIcon';
-import GithubIcon from '../components/icons/GithubIcon';
-import LinkedinIcon from '../components/icons/LinkedinIcon';
+import { TwitterIcon, GithubIcon, LinkedinIcon } from '../components/Icons';
 import { getTopTracks, getTopAlbums, Item, getTopArtists } from '../lib/lastfm/lastfmClient';
 import ScrobbleSection from '../components/ScrobbleSection';
 
