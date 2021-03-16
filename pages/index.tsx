@@ -4,6 +4,7 @@ import Head from 'next/head';
 
 import {
   siteTitle,
+  wavesUrl,
   twitterUrl,
   githubUrl,
   linkedinUrl,
@@ -11,8 +12,20 @@ import {
   email,
 } from '../lib/data.json';
 
-import { TwitterIcon, GithubIcon, LinkedinIcon } from '../components/Icons';
-import { getTopTracks, getTopAlbums, Item, getTopArtists } from '../lib/lastfm/lastfmClient';
+import {
+  WavesIcon,
+  TwitterIcon,
+  GithubIcon,
+  LinkedinIcon,
+} from '../components/Icons';
+
+import {
+  getTopTracks,
+  getTopAlbums,
+  Item,
+  getTopArtists,
+} from '../lib/lastfm/lastfmClient';
+
 import ScrobbleSection from '../components/ScrobbleSection';
 
 type Props = {
@@ -27,6 +40,7 @@ type NavItem = {
 }
 
 const navItems: NavItem[] = [
+  { url: wavesUrl, Icon: WavesIcon },
   { url: twitterUrl, Icon: TwitterIcon },
   { url: githubUrl, Icon: GithubIcon },
   { url: linkedinUrl, Icon: LinkedinIcon },
@@ -58,10 +72,6 @@ const Home = (props: Props): JSX.Element => {
       </header>
 
       <main>
-        <div className="pt-8">
-          <h2 className="font-fira text-xl font-semibold tracking-wide">Waves</h2>
-          <a href="https://waves.olle.io" target="_blank" rel="noopener noreferrer external" className="text-blue-600 hover:underline">https://waves.olle.io</a>
-        </div>
         <div className="pt-8">
           <h2 className="font-fira text-xl font-semibold tracking-wide">Scrobbles</h2>
           <div className="border border-gray-800 rounded-md py-2 px-4 mt-2">
