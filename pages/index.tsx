@@ -71,13 +71,10 @@ const Home = (props: Props): JSX.Element => {
       </header>
 
       <main>
-        <div className="pt-8">
-          <h2 className="text-xl font-semibold tracking-wide">Scrobbles</h2>
-          <div className="border border-gray-800 rounded-md py-2 px-4 mt-2">
-            <ScrobbleSection title="Top Tracks" items={tracks} />
-            <ScrobbleSection title="Top Albums" items={albums} />
-            <ScrobbleSection title="Top Artists" items={artists} />
-          </div>
+        <div className="pt-4">
+          <ScrobbleSection title="Top Tracks" items={tracks} />
+          <ScrobbleSection title="Top Albums" items={albums} />
+          <ScrobbleSection title="Top Artists" items={artists} />
         </div>
       </main>
 
