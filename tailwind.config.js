@@ -24,8 +24,8 @@ module.exports = {
           '"Segoe UI Symbol"',
           '"Noto Color Emoji"',
         ],
-        fira: [
-          'Fira',
+        'victor-mono': [
+          'VictorMono',
           'ui-monospace',
           'SFMono-Regular',
           'Menlo',
@@ -34,7 +34,7 @@ module.exports = {
           '"Liberation Mono"',
           '"Courier New"',
           'monospace',
-        ]
+        ],
       },
     },
   },
