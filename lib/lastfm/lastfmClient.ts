@@ -11,7 +11,7 @@ import {
 
 import { userAgent } from '../data.json';
 
-type Period = 'overall' | '7day' | '1month' | '3month' | '6month' | '12month';
+export type Period = 'overall' | '7day' | '1month' | '3month' | '6month' | '12month';
 
 type QueryKey = 'method' | 'user' | 'api_key' | 'format' | 'period' | 'limit';
 type QueryMethod = 'user.gettoptracks' | 'user.gettopalbums' | 'user.gettopartists';
