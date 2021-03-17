@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Item, Period } from '../lib/lastfm/lastfmClient';
+import { isPeriod } from '../lib/utils';
 
 type Props = {
   title: string;
@@ -27,7 +28,8 @@ const ScrobbleSection = ({ title, items }: Props): JSX.Element => {
 
   const handleChange: React.ChangeEventHandler<HTMLSelectElement> = (event) => {
     const { value } = event.target;
-    setSelectedOption(value as Period);
+    const period: Period = isPeriod(value) ? value : '1month';
+    setSelectedOption(period);
   };
 
   return (

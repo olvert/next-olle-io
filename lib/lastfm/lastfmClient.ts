@@ -20,6 +20,8 @@ type QueryObject = Record<QueryKey, string>;
 type ItemsResponse = [number, Item[] | undefined];
 type Mapper = (json: unknown) => Item[];
 
+export type TopItemsFetcher = (period: Period) => Promise<ItemsResponse>;
+
 export type Item = {
   name: string;
   artist: string;
@@ -106,19 +108,19 @@ const getItems = async (key: string, mapper: Mapper): Promise<ItemsResponse> => 
   return [res.status, items];
 };
 
-export const getTopTracks = async (period: Period): Promise<ItemsResponse> => {
+export const getTopTracks: TopItemsFetcher = async (period) => {
   const key = getTopTracksKey(period);
 
   return getItems(key, mapTopTracksEnvelopeToItems);
 };
 
-export const getTopAlbums = async (period: Period): Promise<ItemsResponse> => {
+export const getTopAlbums: TopItemsFetcher = async (period) => {
   const key = getTopAlbumsKey(period);
 
   return getItems(key, mapTopAlbumsEnvelopeToItems);
 };
 
-export const getTopArtists = async (period: Period): Promise<ItemsResponse> => {
+export const getTopArtists: TopItemsFetcher = async (period) => {
   const key = getTopArtistsKey(period);
 
   return getItems(key, mapTopArtistsEnvelopeToItems);
