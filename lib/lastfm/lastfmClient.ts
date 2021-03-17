@@ -18,7 +18,7 @@ type QueryMethod = 'user.gettoptracks' | 'user.gettopalbums' | 'user.gettopartis
 type QueryObject = Record<QueryKey, string>;
 
 type ItemsResponse = [number, Item[] | undefined];
-type Mapper = (json: any) => Item[];
+type Mapper = (json: unknown) => Item[];
 
 export type Item = {
   name: string;
