@@ -37,7 +37,7 @@ const ScrobbleSection = ({ title, items }: Props): JSX.Element => {
       <div className="flex items-center justify-between">
         <h2 className="text-lg font-semibold tracking-wide">{title}</h2>
         <select className="bg-transparent rounded p-1 focus:outline-none hover:bg-gray-800 cursor-pointer" value={selectedOption} onChange={handleChange}>
-          { selectOptions.map((so) => <option value={so.value}>{so.label}</option>) }
+          { selectOptions.map((so) => <option key={so.value} value={so.value}>{so.label}</option>) }
         </select>
       </div>
       { items.map((t) => (
