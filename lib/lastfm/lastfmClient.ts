@@ -1,5 +1,15 @@
-import fetch from 'node-fetch';
-import { Album, Artist, EnvelopeTopAlbums, EnvelopeTopArtists, EnvelopeTopTracks, Track } from './lastfmModels';
+import fetch, { RequestInit } from 'node-fetch';
+
+import {
+  Album,
+  Artist,
+  EnvelopeTopAlbums,
+  EnvelopeTopArtists,
+  EnvelopeTopTracks,
+  Track,
+} from './lastfmModels';
+
+import { userAgent } from '../data.json';
 
 type Period = 'overall' | '7day' | '1month' | '3month' | '6month' | '12month';
 
@@ -21,6 +31,12 @@ const API_KEY = process.env.LAST_FM_API_KEY;
 const USER = process.env.LAST_FM_USER;
 
 const LIMIT = 5;
+
+const fetchOtions: RequestInit = {
+  headers: {
+    'User-Agent': userAgent,
+  },
+};
 
 const getKey = (method: QueryMethod, period: Period): string => {
   const queryObject: QueryObject = {
@@ -78,7 +94,7 @@ const mapTopArtistsEnvelopeToItems = (envelope: EnvelopeTopArtists): Item[] => {
 };
 
 const getItems = async (key: string, mapper: Mapper): Promise<ItemsResponse> => {
-  const res = await fetch(key);
+  const res = await fetch(key, fetchOtions);
 
   if (res.ok !== true) {
     return [res.status, undefined];
