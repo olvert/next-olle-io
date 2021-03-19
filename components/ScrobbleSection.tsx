@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useSWR } from '../lib/customSWR';
-import { Item, Period } from '../lib/lastfm/lastfmClient';
+import { defaultPeriod, Item, Period } from '../lib/lastfm/lastfmClient';
 import { isPeriod } from '../lib/utils';
 
 type Props = {
@@ -29,14 +29,15 @@ const getItemKey = (t: Item): string => `${t.artist}+${t.name}`.split(' ').join(
 const getFetchKey = (baseKey: string, period: Period): string => `${baseKey}?period=${period}`;
 
 const ScrobbleSection = ({ title, items, baseKey }: Props): JSX.Element => {
-  const [selectedOption, setSelectedOption] = useState<Period>('1month');
+  const [selectedOption, setSelectedOption] = useState<Period>(defaultPeriod);
 
+  const swrOptions = { initialData: selectedOption === defaultPeriod ? items : null };
   const key = getFetchKey(baseKey, selectedOption);
-  const { data } = useSWR<Item[]>(key, fetcher, { initialData: selectedOption === '1month' ? items : null });
+  const { data } = useSWR<Item[]>(key, fetcher, swrOptions);
 
   const handleChange: React.ChangeEventHandler<HTMLSelectElement> = (event) => {
     const { value } = event.target;
-    const period: Period = isPeriod(value) ? value : '1month';
+    const period: Period = isPeriod(value) ? value : defaultPeriod;
     setSelectedOption(period);
   };
 

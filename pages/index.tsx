@@ -24,6 +24,7 @@ import {
   getTopAlbums,
   Item,
   getTopArtists,
+  defaultPeriod,
 } from '../lib/lastfm/lastfmClient';
 
 import ScrobbleSection from '../components/ScrobbleSection';
@@ -84,9 +85,9 @@ const Home = (props: Props): JSX.Element => {
 };
 
 export const getStaticProps: GetStaticProps = async () => {
-  const [, tracks] = await getTopTracks('1month');
-  const [, albums] = await getTopAlbums('1month');
-  const [, artists] = await getTopArtists('1month');
+  const [, tracks] = await getTopTracks(defaultPeriod);
+  const [, albums] = await getTopAlbums(defaultPeriod);
+  const [, artists] = await getTopArtists(defaultPeriod);
 
   return {
     props: {

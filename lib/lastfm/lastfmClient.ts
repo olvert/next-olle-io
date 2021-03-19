@@ -13,6 +13,8 @@ import { userAgent } from '../data.json';
 
 export type Period = 'overall' | '7day' | '1month' | '3month' | '6month' | '12month';
 
+export const defaultPeriod: Period = '1month';
+
 type QueryKey = 'method' | 'user' | 'api_key' | 'format' | 'period' | 'limit';
 type QueryMethod = 'user.gettoptracks' | 'user.gettopalbums' | 'user.gettopartists';
 type QueryObject = Record<QueryKey, string>;
@@ -28,11 +30,11 @@ export type Item = {
   playCount: string;
 }
 
+export const fetchSize = 5;
+
 const BASE_URL = 'https://ws.audioscrobbler.com/2.0';
 const API_KEY = process.env.LAST_FM_API_KEY;
 const USER = process.env.LAST_FM_USER;
-
-const LIMIT = 5;
 
 const fetchOtions: RequestInit = {
   headers: {
@@ -45,7 +47,7 @@ const getKey = (method: QueryMethod, period: Period): string => {
     api_key: API_KEY,
     user: USER,
     format: 'json',
-    limit: LIMIT.toString(),
+    limit: fetchSize.toString(),
     method: method.toString(),
     period: period.toString(),
   };
