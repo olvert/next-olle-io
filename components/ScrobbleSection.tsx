@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import classNames from 'classnames';
 import { useSWR } from '../lib/customSWR';
 import { isPeriod } from '../lib/utils';
 
@@ -8,6 +9,7 @@ import {
   Item,
   Period,
 } from '../lib/lastfm/lastfmClient';
+import { LoadingIcon } from './Icons';
 
 type Props = {
   title: string;
@@ -39,7 +41,7 @@ const ScrobbleSection = ({ title, items, baseKey }: Props): JSX.Element => {
 
   const swrOptions = { initialData: selectedOption === defaultPeriod ? items : null };
   const key = getFetchKey(baseKey, selectedOption);
-  const { data } = useSWR<Item[]>(key, fetcher, swrOptions);
+  const { data, isValidating } = useSWR<Item[]>(key, fetcher, swrOptions);
 
   const handleChange: React.ChangeEventHandler<HTMLSelectElement> = (event) => {
     const { value } = event.target;
@@ -51,9 +53,20 @@ const ScrobbleSection = ({ title, items, baseKey }: Props): JSX.Element => {
     <div className="pt-4 pb-2">
       <div className="flex items-center justify-between">
         <h2 className="text-lg font-semibold tracking-wide">{title}</h2>
-        <select className="bg-transparent rounded p-1 focus:outline-none hover:bg-gray-800 cursor-pointer" value={selectedOption} onChange={handleChange}>
-          { selectOptions.map((so) => <option key={so.value} value={so.value}>{so.label}</option>) }
-        </select>
+        <div className="flex items-center">
+          <Loading isLoading={isValidating} />
+          <select
+            disabled={isValidating}
+            className={classNames(
+              'bg-transparent rounded p-1 focus:outline-none',
+              isValidating ? 'cursor-not-allowed' : 'hover:bg-gray-800 cursor-pointer',
+            )}
+            value={selectedOption}
+            onChange={handleChange}
+          >
+            {selectOptions.map((so) => <option key={so.value} value={so.value}>{so.label}</option>)}
+          </select>
+        </div>
       </div>
       <ul>
         {data && data.map((t) => (
@@ -71,5 +84,14 @@ const ScrobbleSection = ({ title, items, baseKey }: Props): JSX.Element => {
     </div>
   );
 };
+
+const Loading = ({ isLoading }: { isLoading: boolean }): JSX.Element => (
+  <LoadingIcon
+    className={classNames(
+      'w-4 h-4 mr-4 text-gray-100 animate-spin',
+      isLoading ? 'visible' : 'hidden',
+    )}
+  />
+);
 
 export default ScrobbleSection;
