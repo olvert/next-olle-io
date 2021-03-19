@@ -1,7 +1,13 @@
 import React, { useState } from 'react';
 import { useSWR } from '../lib/customSWR';
-import { defaultPeriod, Item, Period } from '../lib/lastfm/lastfmClient';
 import { isPeriod } from '../lib/utils';
+
+import {
+  defaultPeriod,
+  fetchSize,
+  Item,
+  Period,
+} from '../lib/lastfm/lastfmClient';
 
 type Props = {
   title: string;
@@ -49,13 +55,19 @@ const ScrobbleSection = ({ title, items, baseKey }: Props): JSX.Element => {
           { selectOptions.map((so) => <option key={so.value} value={so.value}>{so.label}</option>) }
         </select>
       </div>
-      { data && data.map((t) => (
-        <div key={getItemKey(t)} className="text-sm my-2 p-2 rounded border border-gray-800 hover:bg-gray-800">
-          <p className="font-semibold">{t.name}</p>
-          <p className="text-gray-400">{t.artist}</p>
-          <p className="text-gray-400">{`${t.playCount} plays`}</p>
-        </div>
-      ))}
+      <ul>
+        {data && data.map((t) => (
+          <li key={getItemKey(t)} className="h-20 text-sm my-2 p-2 rounded border border-gray-800 hover:bg-gray-800">
+            <p className="font-semibold">{t.name}</p>
+            <p className="text-gray-400">{t.artist}</p>
+            <p className="text-gray-400">{`${t.playCount} plays`}</p>
+          </li>
+        ))}
+
+        {!data && Array.from({ length: fetchSize }, (v, i) => (
+          <li key={i} className="h-20 my-2 rounded border border-gray-800 animate-pulse" />
+        )) }
+      </ul>
     </div>
   );
 };
