@@ -72,9 +72,9 @@ const Home = (props: Props): JSX.Element => {
 
       <main>
         <div className="pt-4">
-          <ScrobbleSection title="Top Tracks" items={tracks} />
-          <ScrobbleSection title="Top Albums" items={albums} />
-          <ScrobbleSection title="Top Artists" items={artists} />
+          <ScrobbleSection title="Top Tracks" items={tracks} baseKey="/api/top/tracks" />
+          <ScrobbleSection title="Top Albums" items={albums} baseKey="/api/top/albums" />
+          <ScrobbleSection title="Top Artists" items={artists} baseKey="/api/top/artists" />
         </div>
       </main>
 

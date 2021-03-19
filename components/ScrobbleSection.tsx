@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
+import { useSWR } from '../lib/customSWR';
 import { Item, Period } from '../lib/lastfm/lastfmClient';
 import { isPeriod } from '../lib/utils';
 
 type Props = {
   title: string;
   items: Item[];
+  baseKey: string;
 }
 
 type SelectOption = {
@@ -21,10 +23,16 @@ const selectOptions: SelectOption[] = [
   { label: 'All time', value: 'overall' },
 ];
 
-const getKey = (t: Item): string => `${t.artist}+${t.name}`.split(' ').join('_').toLocaleLowerCase();
+const fetcher = (key: string) => fetch(key).then((res) => res.json());
 
-const ScrobbleSection = ({ title, items }: Props): JSX.Element => {
+const getItemKey = (t: Item): string => `${t.artist}+${t.name}`.split(' ').join('_').toLocaleLowerCase();
+const getFetchKey = (baseKey: string, period: Period): string => `${baseKey}?period=${period}`;
+
+const ScrobbleSection = ({ title, items, baseKey }: Props): JSX.Element => {
   const [selectedOption, setSelectedOption] = useState<Period>('1month');
+
+  const key = getFetchKey(baseKey, selectedOption);
+  const { data } = useSWR<Item[]>(key, fetcher, { initialData: selectedOption === '1month' ? items : null });
 
   const handleChange: React.ChangeEventHandler<HTMLSelectElement> = (event) => {
     const { value } = event.target;
@@ -40,8 +48,8 @@ const ScrobbleSection = ({ title, items }: Props): JSX.Element => {
           { selectOptions.map((so) => <option key={so.value} value={so.value}>{so.label}</option>) }
         </select>
       </div>
-      { items.map((t) => (
-        <div key={getKey(t)} className="text-sm my-2 p-2 rounded border border-gray-800 hover:bg-gray-800">
+      { data && data.map((t) => (
+        <div key={getItemKey(t)} className="text-sm my-2 p-2 rounded border border-gray-800 hover:bg-gray-800">
           <p className="font-semibold">{t.name}</p>
           <p className="text-gray-400">{t.artist}</p>
           <p className="text-gray-400">{`${t.playCount} plays`}</p>
