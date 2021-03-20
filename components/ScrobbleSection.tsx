@@ -9,7 +9,7 @@ import {
   Item,
   Period,
 } from '../lib/lastfm/lastfmClient';
-import { LoadingIcon } from './Icons';
+import { LoadingIcon, AngleDownIcon } from './Icons';
 
 type Props = {
   title: string;
@@ -55,17 +55,26 @@ const ScrobbleSection = ({ title, items, baseKey }: Props): JSX.Element => {
         <h2 className="text-lg font-semibold tracking-wide">{title}</h2>
         <div className="flex items-center">
           <Loading isLoading={isValidating} />
-          <select
-            disabled={isValidating}
+          <div
             className={classNames(
-              'bg-transparent rounded p-1 focus:outline-none',
+              'flex items-center bg-transparent rounded p-1',
               isValidating ? 'cursor-not-allowed' : 'hover:bg-gray-800 cursor-pointer',
             )}
-            value={selectedOption}
-            onChange={handleChange}
           >
-            {selectOptions.map((so) => <option key={so.value} value={so.value}>{so.label}</option>)}
-          </select>
+            <select
+              disabled={isValidating}
+              className="bg-inherit cursor-inherit focus:outline-none appearance-none"
+              value={selectedOption}
+              onChange={handleChange}
+            >
+              {selectOptions.map((so) => (
+                <option key={so.value} value={so.value}>
+                  {so.label}
+                </option>
+              ))}
+            </select>
+            <AngleDownIcon className="w-4 h-4 ml-4" />
+          </div>
         </div>
       </div>
       <ul>

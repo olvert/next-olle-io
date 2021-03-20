@@ -36,6 +36,12 @@ module.exports = {
           'monospace',
         ],
       },
+      colors: {
+        inherit: 'inherit',
+      },
+      cursor: {
+        inherit: 'inherit',
+      },
     },
   },
   variants: {
