@@ -34,13 +34,14 @@ type Props = {
 
 type NavItem = {
   url: string;
+  label: string;
   Icon: React.FunctionComponent<React.HTMLAttributes<SVGSVGElement>>;
 }
 
 const navItems: NavItem[] = [
-  { url: urls.waves, Icon: WavesIcon },
-  { url: urls.github, Icon: GithubIcon },
-  { url: urls.linkedin, Icon: LinkedinIcon },
+  { url: urls.waves, label: 'Waves', Icon: WavesIcon },
+  { url: urls.github, label: 'Github', Icon: GithubIcon },
+  { url: urls.linkedin, label: 'Linkedin', Icon: LinkedinIcon },
 ];
 
 const Home = (props: Props): JSX.Element => {
@@ -49,13 +50,14 @@ const Home = (props: Props): JSX.Element => {
     <div className="mx-auto w-full max-w-2xl p-4">
       <Head>
         <title>{siteTitle}</title>
+        <meta name="description" content={`${siteTitle} — ${occupation}`} />
       </Head>
       <header className="py-4">
         <div className="flex items-center justify-between pb-2">
           <h1 className="text-lg font-semibold tracking-wide select-none">{siteTitle}</h1>
           <nav className="flex">
-            { navItems.map(({ url, Icon }) => (
-              <a key={url} href={url} target="_blank" rel="noopener noreferrer external" className="text-gray-100 hover:text-blue-600">
+            { navItems.map(({ url, label, Icon }) => (
+              <a key={url} href={url} aria-label={label} target="_blank" rel="noopener noreferrer external" className="text-gray-100 hover:text-blue-600">
                 <Icon className="w-5 h-5 ml-4" />
               </a>
             ))}
