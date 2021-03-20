@@ -5,7 +5,6 @@ import Head from 'next/head';
 import {
   siteTitle,
   wavesUrl,
-  twitterUrl,
   githubUrl,
   linkedinUrl,
   occupation,
@@ -42,7 +41,6 @@ type NavItem = {
 
 const navItems: NavItem[] = [
   { url: wavesUrl, Icon: WavesIcon },
-  { url: twitterUrl, Icon: TwitterIcon },
   { url: githubUrl, Icon: GithubIcon },
   { url: linkedinUrl, Icon: LinkedinIcon },
 ];
