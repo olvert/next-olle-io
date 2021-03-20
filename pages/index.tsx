@@ -24,6 +24,7 @@ import {
 } from '../lib/lastfm/lastfmClient';
 
 import ScrobbleSection from '../components/ScrobbleSection';
+import { getVersion } from '../lib/utils';
 
 type Props = {
   tracks: Item[];
@@ -67,14 +68,16 @@ const Home = (props: Props): JSX.Element => {
       </header>
 
       <main>
-        <div className="pt-4">
+        <div className="py-4">
           <ScrobbleSection title="Top Tracks" items={tracks} baseKey="/api/top/tracks" />
           <ScrobbleSection title="Top Albums" items={albums} baseKey="/api/top/albums" />
           <ScrobbleSection title="Top Artists" items={artists} baseKey="/api/top/artists" />
         </div>
       </main>
 
-      <footer />
+      <footer>
+        <p className="text-gray-400 text-sm text-center">{getVersion()}</p>
+      </footer>
     </div>
   );
 };
