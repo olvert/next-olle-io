@@ -13,7 +13,6 @@ import {
 
 import {
   WavesIcon,
-  TwitterIcon,
   GithubIcon,
   LinkedinIcon,
 } from '../components/Icons';
@@ -54,7 +53,7 @@ const Home = (props: Props): JSX.Element => {
       </Head>
       <header className="py-4">
         <div className="flex items-center justify-between pb-2">
-          <h1 className="text-xl font-semibold tracking-wider select-none uppercase">{siteTitle}</h1>
+          <h1 className="text-lg font-semibold tracking-wide select-none">{siteTitle}</h1>
           <nav className="flex">
             { navItems.map(({ url, Icon }) => (
               <a key={url} href={url} target="_blank" rel="noopener noreferrer external" className="text-gray-100 hover:text-blue-600">
@@ -63,7 +62,7 @@ const Home = (props: Props): JSX.Element => {
             ))}
           </nav>
         </div>
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between text-gray-400">
           <p>{occupation}</p>
           <p>{email}</p>
         </div>
