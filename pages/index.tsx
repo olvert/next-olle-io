@@ -4,9 +4,7 @@ import Head from 'next/head';
 
 import {
   siteTitle,
-  wavesUrl,
-  githubUrl,
-  linkedinUrl,
+  urls,
   occupation,
   email,
 } from '../lib/data.json';
@@ -39,9 +37,9 @@ type NavItem = {
 }
 
 const navItems: NavItem[] = [
-  { url: wavesUrl, Icon: WavesIcon },
-  { url: githubUrl, Icon: GithubIcon },
-  { url: linkedinUrl, Icon: LinkedinIcon },
+  { url: urls.waves, Icon: WavesIcon },
+  { url: urls.github, Icon: GithubIcon },
+  { url: urls.linkedin, Icon: LinkedinIcon },
 ];
 
 const Home = (props: Props): JSX.Element => {

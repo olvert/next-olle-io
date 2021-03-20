@@ -1,9 +1,11 @@
 {
   "siteTitle": "Olle Svensson",
-  "wavesUrl": "https://waves.olle.io",
-  "twitterUrl": "https://twitter.com/olle_io",
-  "githubUrl": "https://github.com/olvert",
-  "linkedinUrl": "https://se.linkedin.com/in/ollenossnevs",
+  "urls": {
+    "waves": "https://waves.olle.io",
+    "twitter": "https://twitter.com/olle_io",
+    "github": "https://github.com/olvert",
+    "linkedin": "https://se.linkedin.com/in/ollenossnevs"
+  },
   "occupation": "Systems Developer at NilsonGroup",
   "email": "me@olle.io",
   "userAgent": "olle.io/1.0"
