@@ -50,7 +50,11 @@ const Home = (props: Props): JSX.Element => {
     <div className="mx-auto w-full max-w-2xl p-4">
       <Head>
         <title>{siteTitle}</title>
-        <meta name="description" content={`${siteTitle} — ${occupation}`} />
+        <meta name="description" content={occupation} />
+
+        <meta property="og:title" content={siteTitle} />
+        <meta property="og:description" content={occupation} />
+        <meta property="og:type" content="website" />
       </Head>
       <header className="py-4">
         <div className="flex items-center justify-between pb-2">
