@@ -5,7 +5,7 @@ import Head from 'next/head';
 import {
   siteTitle,
   urls,
-  occupation,
+  job,
   email,
 } from '../lib/data.json';
 
@@ -44,16 +44,18 @@ const navItems: NavItem[] = [
   { url: urls.linkedin, label: 'Linkedin', Icon: LinkedinIcon },
 ];
 
+const getOccupation = (): string => `${job.title} at ${job.company}`;
+
 const Home = (props: Props): JSX.Element => {
   const { tracks, albums, artists } = props;
   return (
     <div className="mx-auto w-full max-w-2xl p-4">
       <Head>
         <title>{siteTitle}</title>
-        <meta name="description" content={occupation} />
+        <meta name="description" content={getOccupation()} />
 
         <meta property="og:title" content={siteTitle} />
-        <meta property="og:description" content={occupation} />
+        <meta property="og:description" content={getOccupation()} />
         <meta property="og:type" content="website" />
       </Head>
       <header className="py-4">
@@ -68,7 +70,18 @@ const Home = (props: Props): JSX.Element => {
           </nav>
         </div>
         <div className="flex items-center justify-between text-gray-400">
-          <p>{occupation}</p>
+          <p>
+            {job.title}
+            {' at '}
+            <a
+              href={job.url}
+              target="_blank"
+              rel="noreferrer"
+              className="text-gray-400 hover:text-blue-600"
+            >
+              {job.company}
+            </a>
+          </p>
           <p>{email}</p>
         </div>
       </header>
