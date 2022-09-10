@@ -27,5 +27,12 @@ module.exports = {
     'no-undef': 'off',
     'react/jsx-filename-extension': [2, { extensions: ['.tsx'] }],
     'react/jsx-props-no-spreading': 0,
+    'react/function-component-definition': [
+      true,
+      {
+        'namedComponents': 'arrow-function',
+        'unnamedComponents': 'arrow-function'
+      }
+    ]
   },
 };
