@@ -1,5 +1,3 @@
-/* eslint-disable import/prefer-default-export */
-
 import { NextApiRequest, NextApiResponse } from 'next';
 import { Period, TopItemsFetcher } from './lastfm/lastfmClient';
 import { isPeriod } from './utils';
