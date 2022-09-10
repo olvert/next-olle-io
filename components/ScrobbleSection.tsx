@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import classNames from 'classnames';
-import { useSWR } from '../lib/customSWR';
 import { isPeriod } from '../lib/utils';
+import useSWR from 'swr';
 
 import {
   defaultPeriod,
@@ -39,7 +39,7 @@ const getFetchKey = (baseKey: string, period: Period): string => `${baseKey}?per
 const ScrobbleSection = ({ title, items, baseKey }: Props): JSX.Element => {
   const [selectedOption, setSelectedOption] = useState<Period>(defaultPeriod);
 
-  const swrOptions = { initialData: selectedOption === defaultPeriod ? items : null };
+  const swrOptions = { fallbackData: selectedOption === defaultPeriod ? items : null };
   const key = getFetchKey(baseKey, selectedOption);
   const { data, isValidating } = useSWR<Item[]>(key, fetcher, swrOptions);
 
