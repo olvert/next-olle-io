@@ -9,8 +9,6 @@ import {
   Track,
 } from './lastfmModels';
 
-import { userAgent } from '../data.json';
-
 export type Period = 'overall' | '7day' | '1month' | '3month' | '6month' | '12month';
 
 export const defaultPeriod: Period = '1month';
@@ -38,7 +36,7 @@ const USER = process.env.LAST_FM_USER;
 
 const fetchOtions: RequestInit = {
   headers: {
-    'User-Agent': userAgent,
+    'User-Agent': "olle.io/2.0",
   },
 };
 
