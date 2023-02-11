@@ -8,7 +8,7 @@ import {
   fetchSize,
   Item,
   Period
-} from '../lib/lastfm/lastfmClient';
+} from '../lib/lastfm/client';
 
 type Props = {
   title: string;

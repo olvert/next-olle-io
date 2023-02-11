@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { Period, TopItemsFetcher } from './lastfm/lastfmClient';
+import { Period, TopItemsFetcher } from './lastfm/client';
 import { isPeriod } from './utils';
 
 const validatePeriodQueryParam = (value: unknown): [boolean, string] => {

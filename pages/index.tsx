@@ -9,13 +9,12 @@ import imageMBDTF from '../public/img/mbdtf.png';
 import {
   getTopTracks,
   getTopAlbums,
-  Item,
   getTopArtists,
   defaultPeriod,
-} from '../lib/lastfm/lastfmClient';
+  Item,
+} from '../lib/lastfm/client';
 
 import ScrobbleSection from '../components/ScrobbleSection';
-import { getVersion } from '../lib/utils';
 
 type Props = {
   tracks: Item[];
@@ -24,7 +23,6 @@ type Props = {
 }
 
 const Home = (props: Props): JSX.Element => {
-  const { tracks, albums, artists } = props;
   const [imageIndex, setImageIndex] = React.useState(0);
   return (
     <div className="mx-auto w-full max-w-2xl p-4">
@@ -54,13 +52,13 @@ const Home = (props: Props): JSX.Element => {
       </header>
 
       <main className="pt-5 sm:pt-10">
-        <ScrobbleSection title="Top Tracks" items={tracks} baseKey="/api/top/tracks" />
-        <ScrobbleSection title="Top Albums" items={albums} baseKey="/api/top/albums" />
-        <ScrobbleSection title="Top Artists" items={artists} baseKey="/api/top/artists" />
+        <ScrobbleSection title="Top Tracks" items={props.tracks} baseKey="/api/top/tracks" />
+        <ScrobbleSection title="Top Albums" items={props.albums} baseKey="/api/top/albums" />
+        <ScrobbleSection title="Top Artists" items={props.artists} baseKey="/api/top/artists" />
       </main>
 
       <footer className="flex items-center justify-center text-sm">
-        <p className="px-2">{getVersion()}</p>
+        <p className="px-2">2.1.0</p>
         —
         <a className="px-2 text-blackish" href="https://github.com/olvert">GitHub</a>
         —
@@ -76,11 +74,7 @@ export const getStaticProps: GetStaticProps = async () => {
   const [, artists] = await getTopArtists(defaultPeriod);
 
   return {
-    props: {
-      tracks,
-      albums,
-      artists,
-    },
+    props: { tracks, albums, artists },
     revalidate: 1,
   };
 };
