@@ -4,6 +4,7 @@ import Head from 'next/head';
 import NextImage from 'next/image';
 
 import imagePablo from '../public/img/pablo.png';
+import imageMBDTF from '../public/img/mbdtf.png';
 
 import {
   title,
@@ -29,6 +30,7 @@ type Props = {
 
 const Home = (props: Props): JSX.Element => {
   const { tracks, albums, artists } = props;
+  const [imageIndex, setImageIndex] = React.useState(0);
   return (
     <div className="mx-auto w-full max-w-2xl p-4">
       <Head>
@@ -39,14 +41,9 @@ const Home = (props: Props): JSX.Element => {
         {/* <meta property="og:description" content={getOccupation()} /> */}
         <meta property="og:type" content="website" />
       </Head>
-      <header>
-        <NextImage
-          src={imagePablo}
-          width={1024}
-          height={1024}
-          quality={100}
-          placeholder="blur"
-        />
+      <header className="cursor-pointer" onClick={() => setImageIndex((imageIndex + 1) % 2)}>
+        {imageIndex === 0 && <NextImage src={imageMBDTF} width={1024} height={1024} quality={100} placeholder="blur" />}
+        {imageIndex === 1 && <NextImage src={imagePablo} width={1024} height={1024} quality={100} placeholder="blur" />}
       </header>
 
       <main className="pt-10">
