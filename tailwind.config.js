@@ -6,10 +6,19 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        inter: [
-          'Inter',
-          'ui-sans-serif',
-          'system-ui',
+        'victor-mono': [
+          'VictorMono',
+          'ui-monospace',
+          'SFMono-Regular',
+          'Menlo',
+          'Monaco',
+          'Consolas',
+          '"Liberation Mono"',
+          '"Courier New"',
+          'monospace',
+        ],
+        'apfel-grotezk': [
+          'ApfelGrotezk',
           '-apple-system',
           'BlinkMacSystemFont',
           '"Segoe UI"',
@@ -23,20 +32,25 @@ module.exports = {
           '"Segoe UI Symbol"',
           '"Noto Color Emoji"',
         ],
-        'victor-mono': [
-          'VictorMono',
-          'ui-monospace',
-          'SFMono-Regular',
-          'Menlo',
-          'Monaco',
-          'Consolas',
-          '"Liberation Mono"',
-          '"Courier New"',
-          'monospace',
+        'inter': [
+          'Inter',
+          '-apple-system',
+          'BlinkMacSystemFont',
+          '"Segoe UI"',
+          'Roboto',
+          '"Helvetica Neue"',
+          'Arial',
+          '"Noto Sans"',
+          'sans-serif',
+          '"Apple Color Emoji"',
+          '"Segoe UI Emoji"',
+          '"Segoe UI Symbol"',
+          '"Noto Color Emoji"',
         ],
       },
       colors: {
         inherit: 'inherit',
+        blackish: '#333333',
       },
       cursor: {
         inherit: 'inherit',

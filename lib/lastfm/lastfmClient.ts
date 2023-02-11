@@ -75,7 +75,7 @@ const albumToItem = (album: Album): Item => ({
 
 const artistToItem = (artist: Artist): Item => ({
   name: artist.name,
-  artist: '',
+  artist: artist.name,
   playCount: artist.playcount,
 });
 

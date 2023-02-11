@@ -1,19 +1,14 @@
 import React from 'react';
 import { GetStaticProps } from 'next';
 import Head from 'next/head';
+import NextImage from 'next/image';
+
+import imagePablo from '../public/img/pablo.png';
 
 import {
-  siteTitle,
+  title,
   urls,
-  job,
-  email,
 } from '../lib/data.json';
-
-import {
-  WavesIcon,
-  GithubIcon,
-  LinkedinIcon,
-} from '../components/Icons';
 
 import {
   getTopTracks,
@@ -32,70 +27,40 @@ type Props = {
   artists: Item[];
 }
 
-type NavItem = {
-  url: string;
-  label: string;
-  Icon: React.FunctionComponent<React.HTMLAttributes<SVGSVGElement>>;
-}
-
-const navItems: NavItem[] = [
-  { url: urls.waves, label: 'Waves', Icon: WavesIcon },
-  { url: urls.github, label: 'Github', Icon: GithubIcon },
-  { url: urls.linkedin, label: 'Linkedin', Icon: LinkedinIcon },
-];
-
-const getOccupation = (): string => `${job.title} at ${job.company}`;
-
 const Home = (props: Props): JSX.Element => {
   const { tracks, albums, artists } = props;
   return (
     <div className="mx-auto w-full max-w-2xl p-4">
       <Head>
-        <title>{siteTitle}</title>
-        <meta name="description" content={getOccupation()} />
+        <title>{title}</title>
+        {/* <meta name="description" content="olle" /> */}
 
-        <meta property="og:title" content={siteTitle} />
-        <meta property="og:description" content={getOccupation()} />
+        <meta property="og:title" content={title} />
+        {/* <meta property="og:description" content={getOccupation()} /> */}
         <meta property="og:type" content="website" />
       </Head>
-      <header className="py-4">
-        <div className="flex items-center justify-between pb-2">
-          <h1 className="text-lg font-semibold tracking-wide select-none">{siteTitle}</h1>
-          <nav className="flex">
-            { navItems.map(({ url, label, Icon }) => (
-              <a key={url} href={url} aria-label={label} target="_blank" rel="noopener noreferrer external" className="text-gray-100 hover:text-blue-600">
-                <Icon className="w-5 h-5 ml-4" />
-              </a>
-            ))}
-          </nav>
-        </div>
-        <div className="flex items-center justify-between text-gray-400">
-          <p>
-            {job.title}
-            {' at '}
-            <a
-              href={job.url}
-              target="_blank"
-              rel="noreferrer"
-              className="text-gray-400 hover:text-blue-600"
-            >
-              {job.company}
-            </a>
-          </p>
-          <p>{email}</p>
-        </div>
+      <header>
+        <NextImage
+          src={imagePablo}
+          width={1024}
+          height={1024}
+          quality={100}
+          placeholder="blur"
+        />
       </header>
 
-      <main>
-        <div className="py-4">
-          <ScrobbleSection title="Top Tracks" items={tracks} baseKey="/api/top/tracks" />
-          <ScrobbleSection title="Top Albums" items={albums} baseKey="/api/top/albums" />
-          <ScrobbleSection title="Top Artists" items={artists} baseKey="/api/top/artists" />
-        </div>
+      <main className="pt-10">
+        <ScrobbleSection title="Top Tracks" items={tracks} baseKey="/api/top/tracks" />
+        <ScrobbleSection title="Top Albums" items={albums} baseKey="/api/top/albums" />
+        <ScrobbleSection title="Top Artists" items={artists} baseKey="/api/top/artists" />
       </main>
 
-      <footer>
-        <p className="text-gray-400 text-sm text-center">{getVersion()}</p>
+      <footer className="flex items-center justify-center text-sm">
+        <p className="px-2">{getVersion()}</p>
+        —
+        <a className="px-2 text-blackish" href={urls.github}>GitHub</a>
+        —
+        <a className="px-2 text-blackish" href={urls.github}>LinkedIn</a>
       </footer>
     </div>
   );

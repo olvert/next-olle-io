@@ -1,15 +1,14 @@
-import React, { useState } from 'react';
 import classNames from 'classnames';
-import { isPeriod } from '../lib/utils';
+import React, { useState } from 'react';
 import useSWR from 'swr';
+import { isPeriod } from '../lib/utils';
 
 import {
   defaultPeriod,
   fetchSize,
   Item,
-  Period,
+  Period
 } from '../lib/lastfm/lastfmClient';
-import { LoadingIcon, AngleDownIcon } from './Icons';
 
 type Props = {
   title: string;
@@ -50,20 +49,15 @@ const ScrobbleSection = ({ title, items, baseKey }: Props): JSX.Element => {
   };
 
   return (
-    <div className="pt-4 pb-2">
-      <div className="flex items-center justify-between">
-        <h2 className="text-lg font-semibold tracking-wide">{title}</h2>
-        <div className="flex items-center">
-          <Loading isLoading={isValidating} />
-          <div
-            className={classNames(
-              'flex items-center bg-transparent rounded p-1',
-              isValidating ? 'cursor-not-allowed' : 'hover:bg-gray-800 cursor-pointer',
-            )}
-          >
+    <div className="pb-20">
+      <div className="flex items-center justify-between pb-2">
+        <h2 className="text-2xl font-semibold uppercase">{title}</h2>
+          <div className="flex items-center">
             <select
-              disabled={isValidating}
-              className="bg-inherit cursor-inherit focus:outline-none appearance-none"
+              className={classNames(
+                'focus:outline-none appearance-none hover:underline pr-2',
+                isValidating ? 'cursor-not-allowed' : 'cursor-pointer',
+              )}
               value={selectedOption}
               onChange={handleChange}
             >
@@ -73,34 +67,24 @@ const ScrobbleSection = ({ title, items, baseKey }: Props): JSX.Element => {
                 </option>
               ))}
             </select>
-            <AngleDownIcon className="w-4 h-4 ml-4" />
+            {!isValidating && <span className="block mt-0.5">↓</span>}
+            {isValidating && <span className="block mt-0.5 animate-spin">↻</span>}
           </div>
-        </div>
       </div>
       <ul>
-        {data && data.map((t) => (
-          <li key={getItemKey(t)} className="h-20 text-sm my-2 p-2 rounded border border-gray-800">
-            <p className="font-semibold truncate">{t.name}</p>
-            <p className="text-gray-400 truncate">{t.artist}</p>
-            <p className="text-gray-400 truncate">{`${t.playCount} plays`}</p>
+        {data && data.map((t, i) => (
+          <li key={getItemKey(t)} className="h-14 my-2">
+            <p className="font-semibold text-lg truncate">{`${i+1}. ${t.name}`}</p>
+            <p className="truncate">{t.artist} — {`${t.playCount} plays`}</p>
           </li>
         ))}
 
         {!data && Array.from({ length: fetchSize }, (v, i) => (
-          <li key={i} className="h-20 my-2 rounded border border-gray-800 animate-pulse" />
+          <li key={i} className="h-14 my-2" />
         )) }
       </ul>
     </div>
   );
 };
-
-const Loading = ({ isLoading }: { isLoading: boolean }): JSX.Element => (
-  <LoadingIcon
-    className={classNames(
-      'w-4 h-4 mr-4 text-gray-100 animate-spin',
-      isLoading ? 'visible' : 'hidden',
-    )}
-  />
-);
 
 export default ScrobbleSection;

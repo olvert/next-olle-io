@@ -1,16 +1,8 @@
 {
-  "siteTitle": "Olle Svensson",
+  "title": "ULE",
   "urls": {
-    "waves": "https://waves.olle.io",
-    "twitter": "https://twitter.com/olle_io",
     "github": "https://github.com/olvert",
     "linkedin": "https://se.linkedin.com/in/ollenossnevs"
   },
-  "job": {
-    "title": "Developer",
-    "company": "GleSYS",
-    "url": "https://glesys.se/"
-  },
-  "email": "me@olle.io",
   "userAgent": "olle.io/1.0"
 }
