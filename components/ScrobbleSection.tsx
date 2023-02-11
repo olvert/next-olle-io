@@ -49,10 +49,10 @@ const ScrobbleSection = ({ title, items, baseKey }: Props): JSX.Element => {
   };
 
   return (
-    <div className="pb-20">
+    <div className="pb-10 sm:pb-20">
       <div className="flex items-center justify-between pb-2">
-        <h2 className="text-2xl font-semibold uppercase">{title}</h2>
-          <div className="flex items-center">
+        <h2 className="text-xl sm:text-2xl font-semibold uppercase">{title}</h2>
+          <div className="flex items-center text-sm sm:text-base">
             <select
               className={classNames(
                 'focus:outline-none appearance-none bg-transparent hover:underline pr-2',
@@ -67,20 +67,20 @@ const ScrobbleSection = ({ title, items, baseKey }: Props): JSX.Element => {
                 </option>
               ))}
             </select>
-            {!isValidating && <span className="block mt-0.5">↓</span>}
-            {isValidating && <span className="block mt-0.5 animate-spin">↻</span>}
+            {!isValidating && <span className="block mt-0 sm:mt-0.5">↓</span>}
+            {isValidating && <span className="block mt-0 sm:mt-0.5 animate-spin">↻</span>}
           </div>
       </div>
       <ul>
         {data && data.map((t, i) => (
-          <li key={getItemKey(t)} className="h-14 my-2">
-            <p className="font-semibold text-lg truncate">{`${i+1}. ${t.name}`}</p>
-            <p className="truncate">{t.artist} — {`${t.playCount} plays`}</p>
+          <li key={getItemKey(t)} className="h-14 my-1 sm:my-2">
+            <p className="text-base sm:text-lg font-semibold truncate">{`${i+1}. ${t.name}`}</p>
+            <p className="text-sm sm:text-base truncate">{t.artist} — {`${t.playCount} plays`}</p>
           </li>
         ))}
 
         {!data && Array.from({ length: fetchSize }, (v, i) => (
-          <li key={i} className="h-14 my-2" />
+          <li key={i} className="h-14 my-1 sm:my-2" />
         )) }
       </ul>
     </div>

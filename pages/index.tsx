@@ -53,7 +53,7 @@ const Home = (props: Props): JSX.Element => {
         {imageIndex === 1 && <NextImage src={imagePablo} width={1024} height={1024} quality={100} placeholder="blur" />}
       </header>
 
-      <main className="pt-10">
+      <main className="pt-5 sm:pt-10">
         <ScrobbleSection title="Top Tracks" items={tracks} baseKey="/api/top/tracks" />
         <ScrobbleSection title="Top Albums" items={albums} baseKey="/api/top/albums" />
         <ScrobbleSection title="Top Artists" items={artists} baseKey="/api/top/artists" />
