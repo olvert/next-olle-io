@@ -55,7 +55,7 @@ const ScrobbleSection = ({ title, items, baseKey }: Props): JSX.Element => {
           <div className="flex items-center">
             <select
               className={classNames(
-                'focus:outline-none appearance-none hover:underline pr-2',
+                'focus:outline-none appearance-none bg-transparent hover:underline pr-2',
                 isValidating ? 'cursor-not-allowed' : 'cursor-pointer',
               )}
               value={selectedOption}
