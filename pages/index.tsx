@@ -47,8 +47,25 @@ const Home = (props: Props): JSX.Element => {
         <link rel="apple-touch-icon" href="favicon.svg" />
       </Head>
       <header className="cursor-pointer" onClick={() => setImageIndex((imageIndex + 1) % 2)}>
-        {imageIndex === 0 && <NextImage src={imageMBDTF} width={1024} height={1024} quality={100} placeholder="blur" alt="Kanye West — My Beautiful Dark Twisted Fantasy" />}
-        {imageIndex === 1 && <NextImage src={imagePablo} width={1024} height={1024} quality={100} placeholder="blur" alt="Kanye West — The Life of Pablo" />}
+        {imageIndex === 0 && <NextImage
+          src={imageMBDTF}
+          width={1024}
+          height={1024}
+          quality={100}
+          placeholder="blur"
+          alt="Kanye West — My Beautiful Dark Twisted Fantasy"
+          sizes="(min-width: 512px) 1024px, 768px"
+          priority={true}
+        />}
+        {imageIndex === 1 && <NextImage
+          src={imagePablo}
+          width={1024}
+          height={1024}
+          quality={100}
+          placeholder="blur"
+          alt="Kanye West — The Life of Pablo"
+          sizes="(min-width: 512px) 1024px, 768px"
+        />}
       </header>
 
       <main className="pt-5 sm:pt-10">
