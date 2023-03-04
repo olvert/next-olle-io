@@ -28,27 +28,27 @@ const Home = (props: Props): JSX.Element => {
     <div className="mx-auto w-full max-w-2xl p-4">
       <Head>
         <title>Olle Svensson</title>
-        <meta name="description" content="" />
+        <meta name="description" content="I'M HAVING A HUMAN EXPERIENCE" />
 
         <meta property="og:url" content="https://olle.io" />
         <meta property="og:type" content="website" />
         <meta property="og:title" content="Olle Svensson" />
-        <meta property="og:description" content="undefined" />
+        <meta property="og:description" content="I'M HAVING A HUMAN EXPERIENCE" />
         <meta property="og:image" content="https://olle.io/img/mbdtf.png" />
 
         <meta name="twitter:card" content="summary_large_image" />
         <meta property="twitter:domain" content="olle.io" />
         <meta property="twitter:url" content="https://olle.io" />
         <meta name="twitter:title" content="Olle Svensson" />
-        <meta name="twitter:description" content="" />
+        <meta name="twitter:description" content="I'M HAVING A HUMAN EXPERIENCE" />
         <meta name="twitter:image" content="https://olle.io/img/mbdtf.png" />
 
         <link rel="icon" href="favicon.svg" />
         <link rel="apple-touch-icon" href="favicon.svg" />
       </Head>
       <header className="cursor-pointer" onClick={() => setImageIndex((imageIndex + 1) % 2)}>
-        {imageIndex === 0 && <NextImage src={imageMBDTF} width={1024} height={1024} quality={100} placeholder="blur" />}
-        {imageIndex === 1 && <NextImage src={imagePablo} width={1024} height={1024} quality={100} placeholder="blur" />}
+        {imageIndex === 0 && <NextImage src={imageMBDTF} width={1024} height={1024} quality={100} placeholder="blur" alt="Kanye West — My Beautiful Dark Twisted Fantasy" />}
+        {imageIndex === 1 && <NextImage src={imagePablo} width={1024} height={1024} quality={100} placeholder="blur" alt="Kanye West — The Life of Pablo" />}
       </header>
 
       <main className="pt-5 sm:pt-10">
