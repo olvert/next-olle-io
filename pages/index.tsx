@@ -54,7 +54,7 @@ const Home = (props: Props): JSX.Element => {
           quality={100}
           placeholder="blur"
           alt="Kanye West — My Beautiful Dark Twisted Fantasy"
-          sizes="(min-width: 512px) 1024px, 768px"
+          sizes="(min-width: 768px) 1024px, (min-width: 512px) 768px, 512px"
           priority={true}
         />}
         {imageIndex === 1 && <NextImage
@@ -64,7 +64,7 @@ const Home = (props: Props): JSX.Element => {
           quality={100}
           placeholder="blur"
           alt="Kanye West — The Life of Pablo"
-          sizes="(min-width: 512px) 1024px, 768px"
+          sizes="(min-width: 768px) 1024px, (min-width: 512px) 768px, 512px"
         />}
       </header>
 
