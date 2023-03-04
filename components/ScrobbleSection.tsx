@@ -7,7 +7,7 @@ import {
   defaultPeriod,
   fetchSize,
   Item,
-  Period
+  Period,
 } from '../lib/lastfm/client';
 
 type Props = {
@@ -52,30 +52,34 @@ const ScrobbleSection = ({ title, items, baseKey }: Props): JSX.Element => {
     <div className="pb-10 sm:pb-20">
       <div className="flex items-center justify-between pb-2">
         <h2 className="text-xl sm:text-2xl font-semibold uppercase">{title}</h2>
-          <div className="flex items-center text-sm sm:text-base">
-            <select
-              className={classNames(
-                'focus:outline-none appearance-none bg-transparent hover:underline pr-2',
-                isValidating ? 'cursor-not-allowed' : 'cursor-pointer',
-              )}
-              value={selectedOption}
-              onChange={handleChange}
-            >
-              {selectOptions.map((so) => (
-                <option key={so.value} value={so.value}>
-                  {so.label}
-                </option>
-              ))}
-            </select>
-            {!isValidating && <span className="block mt-0 sm:mt-0.5">↓</span>}
-            {isValidating && <span className="block mt-0 sm:mt-0.5 animate-spin">↻</span>}
-          </div>
+        <div className="flex items-center text-sm sm:text-base">
+          <select
+            className={classNames(
+              'focus:outline-none appearance-none bg-transparent hover:underline pr-2',
+              isValidating ? 'cursor-not-allowed' : 'cursor-pointer',
+            )}
+            value={selectedOption}
+            onChange={handleChange}
+          >
+            {selectOptions.map((so) => (
+              <option key={so.value} value={so.value}>
+                {so.label}
+              </option>
+            ))}
+          </select>
+          {!isValidating && <span className="block mt-0 sm:mt-0.5">↓</span>}
+          {isValidating && <span className="block mt-0 sm:mt-0.5 animate-spin">↻</span>}
+        </div>
       </div>
       <ul>
         {data && data.map((t, i) => (
           <li key={getItemKey(t)} className="h-14 my-1 sm:my-2">
-            <p className="text-base sm:text-lg font-semibold truncate">{`${i+1}. ${t.name}`}</p>
-            <p className="text-sm sm:text-base truncate">{t.artist} — {`${t.playCount} plays`}</p>
+            <p className="text-base sm:text-lg font-semibold truncate">{`${i + 1}. ${t.name}`}</p>
+            <p className="text-sm sm:text-base truncate">
+              {t.artist}
+              {' — '}
+              {`${t.playCount} plays`}
+            </p>
           </li>
         ))}
 

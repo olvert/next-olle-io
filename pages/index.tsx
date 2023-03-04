@@ -23,6 +23,7 @@ type Props = {
 }
 
 const Home = (props: Props): JSX.Element => {
+  const { tracks, albums, artists } = props;
   const [imageIndex, setImageIndex] = React.useState(0);
   return (
     <div className="mx-auto w-full max-w-2xl p-4">
@@ -47,31 +48,35 @@ const Home = (props: Props): JSX.Element => {
         <link rel="apple-touch-icon" href="favicon.svg" />
       </Head>
       <header className="cursor-pointer" onClick={() => setImageIndex((imageIndex + 1) % 2)}>
-        {imageIndex === 0 && <NextImage
-          src={imageMBDTF}
-          width={1024}
-          height={1024}
-          quality={100}
-          placeholder="blur"
-          alt="Kanye West — My Beautiful Dark Twisted Fantasy"
-          sizes="(min-width: 768px) 1024px, (min-width: 512px) 768px, 512px"
-          priority={true}
-        />}
-        {imageIndex === 1 && <NextImage
-          src={imagePablo}
-          width={1024}
-          height={1024}
-          quality={100}
-          placeholder="blur"
-          alt="Kanye West — The Life of Pablo"
-          sizes="(min-width: 768px) 1024px, (min-width: 512px) 768px, 512px"
-        />}
+        {imageIndex === 0 && (
+          <NextImage
+            src={imageMBDTF}
+            width={1024}
+            height={1024}
+            quality={100}
+            placeholder="blur"
+            alt="Kanye West — My Beautiful Dark Twisted Fantasy"
+            sizes="(min-width: 768px) 1024px, (min-width: 512px) 768px, 512px"
+            priority
+          />
+        )}
+        {imageIndex === 1 && (
+          <NextImage
+            src={imagePablo}
+            width={1024}
+            height={1024}
+            quality={100}
+            placeholder="blur"
+            alt="Kanye West — The Life of Pablo"
+            sizes="(min-width: 768px) 1024px, (min-width: 512px) 768px, 512px"
+          />
+        )}
       </header>
 
       <main className="pt-5 sm:pt-10">
-        <ScrobbleSection title="Top Tracks" items={props.tracks} baseKey="/api/top/tracks" />
-        <ScrobbleSection title="Top Albums" items={props.albums} baseKey="/api/top/albums" />
-        <ScrobbleSection title="Top Artists" items={props.artists} baseKey="/api/top/artists" />
+        <ScrobbleSection title="Top Tracks" items={tracks} baseKey="/api/top/tracks" />
+        <ScrobbleSection title="Top Albums" items={albums} baseKey="/api/top/albums" />
+        <ScrobbleSection title="Top Artists" items={artists} baseKey="/api/top/artists" />
       </main>
 
       <footer className="flex items-center justify-center text-sm">

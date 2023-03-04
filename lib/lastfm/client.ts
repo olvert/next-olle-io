@@ -36,7 +36,7 @@ const USER = process.env.LAST_FM_USER;
 
 const fetchOtions: RequestInit = {
   headers: {
-    'User-Agent': "olle.io/2.0",
+    'User-Agent': 'olle.io/2.0',
   },
 };
 

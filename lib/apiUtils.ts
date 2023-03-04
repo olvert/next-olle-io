@@ -19,7 +19,9 @@ const validatePeriodQueryParam = (value: unknown): [boolean, string] => {
 };
 
 export const topItemsFetcherWrapper = async (
-  req: NextApiRequest, res: NextApiResponse, fetcher: TopItemsFetcher,
+  req: NextApiRequest,
+  res: NextApiResponse,
+  fetcher: TopItemsFetcher,
 ): Promise<void> => {
   const { period } = req.query;
   const [hasErrors, errorMessage] = validatePeriodQueryParam(period);
