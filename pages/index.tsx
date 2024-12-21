@@ -2,6 +2,7 @@ import React from 'react';
 import { GetStaticProps } from 'next';
 import Head from 'next/head';
 import NextImage from 'next/image';
+import { Analytics } from '@vercel/analytics/react';
 
 import imagePablo from '../public/img/pablo.png';
 import imageMBDTF from '../public/img/mbdtf.png';
@@ -77,6 +78,8 @@ const Home = (props: Props): React.JSX.Element => {
         <ScrobbleSection title="Top Tracks" items={tracks} baseKey="/api/top/tracks" />
         <ScrobbleSection title="Top Albums" items={albums} baseKey="/api/top/albums" />
         <ScrobbleSection title="Top Artists" items={artists} baseKey="/api/top/artists" />
+
+        <Analytics />
       </main>
 
       <footer className="flex items-center justify-center text-sm">
