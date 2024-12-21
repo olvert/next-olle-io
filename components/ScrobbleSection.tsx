@@ -35,7 +35,7 @@ const fetcher = (key: string) => fetch(key).then((res) => res.json());
 const getItemKey = (t: Item): string => `${t.artist}+${t.name}`.split(' ').join('_').toLocaleLowerCase();
 const getFetchKey = (baseKey: string, period: Period): string => `${baseKey}?period=${period}`;
 
-const ScrobbleSection = ({ title, items, baseKey }: Props): JSX.Element => {
+const ScrobbleSection = ({ title, items, baseKey }: Props): React.JSX.Element => {
   const [selectedOption, setSelectedOption] = useState<Period>(defaultPeriod);
 
   const swrOptions = { fallbackData: selectedOption === defaultPeriod ? items : null };

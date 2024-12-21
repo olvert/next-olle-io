@@ -22,7 +22,7 @@ type Props = {
   artists: Item[];
 }
 
-const Home = (props: Props): JSX.Element => {
+const Home = (props: Props): React.JSX.Element => {
   const { tracks, albums, artists } = props;
   const [imageIndex, setImageIndex] = React.useState(0);
   return (
