@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@vercel/analytics": "^1.4.1",
+    "@vercel/speed-insights": "^1.1.0",
     "classnames": "^2.5.1",
     "next": "15.1.2",
     "node-fetch": "2.7.0",
